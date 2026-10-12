@@ -107,7 +107,8 @@
 
   /* ---------- 6. equalizzatore ---------- */
   function buildEq(el) {
-    const n = el.dataset.bars ? +el.dataset.bars : clamp(Math.round(innerWidth / 17), 24, 110);
+    const hero = el.classList.contains('gfw-eq--hero');
+    const n = el.dataset.bars ? +el.dataset.bars : hero ? clamp(Math.round(innerWidth / 30), 14, 64) : clamp(Math.round(innerWidth / 17), 24, 110);
     el.setAttribute('aria-hidden', 'true'); el.innerHTML = '';
     const bars = [];
     for (let i = 0; i < n; i++) {
@@ -125,6 +126,8 @@
     el.__bars = bars; el.classList.add('is-js');
     if (reduce) bars.forEach((o) => { o.b.style.transform = 'scaleY(' + (o.h * 0.6).toFixed(2) + ')'; });
   }
+  let ptrX = -1e4, ptrT = -1e4;
+  ['pointermove', 'pointerdown'].forEach((ev) => addEventListener(ev, (e) => { ptrX = e.clientX; ptrT = performance.now(); }, { passive: true }));
   function animateEqs(ts) {
     if (reduce) return;
     const t = ts / 1000, pulse = 0.5 + 0.5 * Math.sin(t * 2.4);
@@ -133,9 +136,12 @@
       const r = el.getBoundingClientRect();
       if (r.bottom < 0 || r.top > innerHeight) return;
       const amp = 0.55 + vel * 0.45, beat = 0.86 + 0.14 * pulse;
+      const isHero = el.classList.contains('gfw-eq--hero');
+      const act = isHero ? Math.max(0, 1 - (ts - ptrT) / 1400) : 0, nb = el.__bars.length;
       el.__bars.forEach((o, i) => {
         const s = 0.5 + 0.5 * Math.sin(t * o.sp + o.ph + i * 0.12);
-        const v = o.lo + (o.h * amp * beat - o.lo) * s;
+        let v = o.lo + (o.h * amp * beat - o.lo) * s;
+        if (act > 0) { const d = (r.left + (i + 0.5) / nb * r.width - ptrX) / (r.width * 0.09); v = Math.min(1, v + Math.exp(-d * d) * 0.75 * act); }
         o.b.style.transform = 'scaleY(' + Math.max(0.04, v).toFixed(3) + ')';
       });
     });
