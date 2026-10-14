@@ -282,6 +282,19 @@
 
   /* ---------- avvio ---------- */
   function start() {
+    // Riprende il corsivo editoriale già usato negli altri titoli.
+    $$('.gf-cta h2, .gf-presence--refined h2').forEach((h) => {
+      const text = h.textContent.trim();
+      const endings = {
+        'Ci vediamo in palestra.': ['Ci vediamo in ', 'palestra.'],
+        'Il tuo impegno. Il nostro supporto.': ['Il tuo impegno. Il nostro ', 'supporto.']
+      };
+      const parts = endings[text];
+      if (!parts || h.querySelector('em')) return;
+      const accent = document.createElement('em');
+      accent.textContent = parts[1];
+      h.replaceChildren(document.createTextNode(parts[0]), accent);
+    });
     $$('main h1, main h2, [data-gfw-split]').forEach(splitHeading);
     prepImages();
     $$('.gfw-facade, [data-gfw-reveal-block]').forEach(reveal);

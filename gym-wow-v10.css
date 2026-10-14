@@ -428,25 +428,53 @@ h1 em,h2 em{font-family:var(--f-serif);font-style:italic;font-weight:400;text-tr
 .gfx-doc code{font-family:var(--f-mono);font-size:.82em;background:rgba(255,255,255,.08);padding:.1em .4em;border-radius:3px}
 .gfx-doc .gf-btn{margin-top:.6rem;cursor:pointer;font-family:var(--f-body)}
 
-/* Titoli delle CTA finali: stile condiviso da tutte le pagine. */
-@font-face {
-  font-family: "GF Manrope";
-  font-style: normal;
+/* CTA finali e sezione staff: stessa tipografia editoriale del sito. */
+.gf-cta h2,
+.gf-presence--refined h2 {
+  font-family: var(--f-display);
   font-weight: 500;
-  font-display: swap;
-  src: url("assets/fonts/body-1.ttf") format("truetype");
+  text-transform: uppercase;
+  letter-spacing: -.025em;
+  line-height: 1.18;
 }
 .gf-cta h2 {
-  font-family: "GF Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-weight: 500;
-  font-size: clamp(2rem, 4.5vw, 4rem);
-  text-transform: none;
-  letter-spacing: -.035em;
-  line-height: 1.2;
-  max-width: 23ch;
-  margin: .75rem auto 1.75rem;
+  font-size: clamp(1.65rem, 3.8vw, 3.25rem);
+  max-width: 26ch;
+  margin: .85rem auto 1.85rem;
   text-wrap: balance;
 }
-
-/* Rifiniture limitate alle due sezioni della pagina La palestra. */
-.gf-presence--refined h2,
+.gf-cta h2 em,
+.gf-presence--refined h2 em {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -.01em;
+  font-size: 1.22em;
+  line-height: 1;
+  color: var(--pink);
+  -webkit-text-stroke: 0;
+}
+.gf-presence--refined h2 {
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  max-width: 26ch;
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+}
+.gf-presence--refined .gf-presence__description {
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.7;
+  max-width: 54ch;
+  margin: 0 0 1.25rem;
+}
+.gf-presence--refined .gf-presence__sunday {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+  max-width: 54ch;
+  margin: 0 0 .65rem;
+}
+.gf-presence--refined .gf-note {
+  max-width: 62ch;
+  margin-bottom: 0;
+}
