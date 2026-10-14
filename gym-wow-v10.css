@@ -427,3 +427,26 @@ h1 em,h2 em{font-family:var(--f-serif);font-style:italic;font-weight:400;text-tr
 .gfx-doc a{color:var(--gfw-pink);text-underline-offset:3px}
 .gfx-doc code{font-family:var(--f-mono);font-size:.82em;background:rgba(255,255,255,.08);padding:.1em .4em;border-radius:3px}
 .gfx-doc .gf-btn{margin-top:.6rem;cursor:pointer;font-family:var(--f-body)}
+
+/* Titoli delle CTA finali: stile condiviso da tutte le pagine. */
+@font-face {
+  font-family: "GF Manrope";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/body-1.ttf") format("truetype");
+}
+.gf-cta h2 {
+  font-family: "GF Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  text-transform: none;
+  letter-spacing: -.035em;
+  line-height: 1.2;
+  max-width: 23ch;
+  margin: .75rem auto 1.75rem;
+  text-wrap: balance;
+}
+
+/* Rifiniture limitate alle due sezioni della pagina La palestra. */
+.gf-presence--refined h2,
