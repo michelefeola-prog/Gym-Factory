@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Schibsted+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('gfw-js')</script>
 <link rel="stylesheet" href="assets/css/gf.css">
-<link rel="stylesheet" href="gym-wow-v10.css">
+<link rel="stylesheet" href="gym-wow-v12.css">
 </head>
 <body>
 <a class="skip" href="#contenuto">Vai al contenuto</a>
@@ -46,24 +46,30 @@
 </section>
 
 <section class="gf-section">
-  <div class="gf-presence gf-presence--refined">
+  <div class="gf-presence">
     <p class="gf-eyebrow" style="color:#fff">La presenza che conta</p>
     <h2>Il tuo impegno. Il nostro supporto.</h2>
-    <p class="gf-presence__description">Personale di sala qualificato presente dal lunedì al sabato, durante tutto l’orario di apertura.</p>
-    <p class="gf-presence__sunday">Aperti anche la domenica, dalle 10:00 alle 13:00.</p>
-    <p class="gf-note" style="color:#e0d2e8">La domenica non è prevista la presenza continuativa del personale di sala. Per conoscere i servizi individuali disponibili, parlane con lo staff.</p>
+    <p class="gfx-staff">Personale di sala qualificato presente durante tutto l’orario di apertura, dal lunedì al sabato.</p>
+    <ul class="gfx-week" aria-label="Giorni di apertura della sala">
+      <li class="is-staff"><b>Lun</b></li><li class="is-staff"><b>Mar</b></li><li class="is-staff"><b>Mer</b></li><li class="is-staff"><b>Gio</b></li><li class="is-staff"><b>Ven</b></li><li class="is-staff"><b>Sab</b></li><li><b>Dom</b><small>10–13</small></li>
+    </ul>
+    <p class="gfx-week__legend"><span><i class="s"></i>Sala aperta con personale qualificato</span><span><i></i>Sala aperta, senza presenza continuativa dello staff</span></p>
+    <p class="gf-note" style="color:#e0d2e8">La sala è aperta anche la domenica, dalle 10:00 alle 13:00. Per conoscere i servizi individuali disponibili, parlane con lo staff.</p>
   </div>
 </section>
 
 <section aria-labelledby="h-dentro">
   <div class="gf-section" style="padding-bottom:0"><p class="gf-eyebrow">Gli ambienti</p><h2 id="h-dentro">Dentro <em>Gym Factory.</em></h2></div>
   <div class="gfw-bento">
-  <figure class="b1" data-gfw-zoom><img src="assets/images/gym/gf-divano.webp" alt="Area d’ingresso con divano chesterfield rosso" loading="lazy"><figcaption>L’ingresso</figcaption></figure>
-  <figure class="b2" data-gfw-zoom><img src="assets/images/gym/gf-gioconda.webp" alt="La Gioconda muscolosa accanto al tapis roulant" loading="lazy" style="object-position:30% 55%"><figcaption>Il nostro quadro preferito</figcaption></figure>
-  <figure class="b3" data-gfw-zoom><img src="assets/images/gym/gf-sala.webp" alt="Sala con parquet e vetrate" loading="lazy"><figcaption>La sala con le vetrate</figcaption></figure>
-  <figure class="b4" data-gfw-zoom><img src="assets/images/gym/gf-bambu.webp" alt="Bambù e lampadario" loading="lazy"><figcaption>Verde e luce</figcaption></figure>
-  <figure class="b5" data-gfw-zoom><img src="assets/images/gym/gf-music.webp" alt="Scritta music to your body" loading="lazy" style="object-position:30% 70%"><figcaption>Music to your body</figcaption></figure>
-  <figure class="b6" data-gfw-zoom><img src="assets/images/gym/gf-scala.webp" alt="La scala" loading="lazy" style="object-position:40% 60%"><figcaption>La scala</figcaption></figure>
+  <figure class="b1" data-gfw-zoom><img src="foto-divano.webp" alt="Area d’ingresso con divano chesterfield rosso" loading="lazy"><figcaption>L’ingresso</figcaption></figure>
+  <figure class="b2" data-gfw-zoom><img src="foto-gioconda.webp" alt="La Gioconda muscolosa accanto al tapis roulant" loading="lazy" style="object-position:30% 55%"><figcaption>Il nostro quadro preferito</figcaption></figure>
+  <figure class="b3" data-gfw-zoom><img src="foto-sala.webp" alt="Sala con parquet e vetrate" loading="lazy"><figcaption>La sala con le vetrate</figcaption></figure>
+  <figure class="b4" data-gfw-zoom><img src="foto-bambu.webp" alt="Bambù e lampadario" loading="lazy"><figcaption>Verde e luce</figcaption></figure>
+  <figure class="b5" data-gfw-zoom><img src="foto-music.webp" alt="Scritta music to your body" loading="lazy" style="object-position:30% 70%"><figcaption>Music to your body</figcaption></figure>
+  <figure class="b6" data-gfw-zoom><img src="foto-scala.webp" alt="La scala" loading="lazy" style="object-position:40% 60%"><figcaption>La scala</figcaption></figure>
+  <figure class="b7" data-gfw-zoom><img src="foto-ingresso.webp" alt="L’ingresso di Gym Factory con l’insegna e l’area relax esterna" loading="lazy"><figcaption>L’ingresso</figcaption></figure>
+  <figure class="b8" data-gfw-zoom><img src="foto-reception.webp" alt="La reception con l’insegna illuminata di blu" loading="lazy"><figcaption>La reception</figcaption></figure>
+  <figure class="b9" data-gfw-zoom><img src="foto-insegna.webp" alt="L’insegna Gym Factory con lo slogan music to your body e un pappagallo decorativo" loading="lazy"><figcaption>Music to your body</figcaption></figure>
 </div>
 </section>
 
@@ -76,12 +82,12 @@
 
 <section class="gf-section" style="padding-top:0" aria-labelledby="h-faq">
   <p class="gf-eyebrow">Prima di venire</p><h2 id="h-faq">Le cose <em>da sapere.</em></h2>
-  <div class="gf-faq"><details><summary>Ci sarà qualcuno in sala a cui chiedere?</summary><p>Sì, il personale di sala qualificato è presente durante tutto l’orario di apertura dal lunedì al sabato. La domenica la sala è aperta dalle 10:00 alle 13:00, senza la presenza continuativa del personale di sala.</p></details><details><summary>Come posso conoscere le attività disponibili?</summary><p>Consulta la pagina <a class="gf-link" href="corsi.html">Corsi e orari</a> per il calendario settimanale. Per modalità di partecipazione e disponibilità, parla con lo staff.</p></details><details><summary>Posso chiedere informazioni prima di iscrivermi?</summary><p>Certo. Trovi i recapiti e le indicazioni per raggiungerci nella pagina <a class="gf-link" href="contatti.html">Contatti</a>.</p></details><details><summary>Il quiz sostituisce il confronto con lo staff?</summary><p>No. Il quiz orienta in base alle tue preferenze; non è una valutazione medica né una prescrizione di allenamento. Lo staff può aiutarti ad approfondire le tue esigenze.</p></details></div>
+  <div class="gf-faq"><details><summary>Ci sarà qualcuno in sala a cui chiedere?</summary><p>Sì, il personale di sala qualificato è presente durante tutto l’orario di apertura dal lunedì al sabato. La domenica è esclusa da questa copertura.</p></details><details><summary>Come posso conoscere le attività disponibili?</summary><p>Consulta la pagina <a class="gf-link" href="corsi.html">Corsi e orari</a> per il calendario settimanale. Per modalità di partecipazione e disponibilità, parla con lo staff.</p></details><details><summary>Posso chiedere informazioni prima di iscrivermi?</summary><p>Certo. Trovi i recapiti e le indicazioni per raggiungerci nella pagina <a class="gf-link" href="contatti.html">Contatti</a>.</p></details><details><summary>Il quiz sostituisce il confronto con lo staff?</summary><p>No. Il quiz orienta in base alle tue preferenze; non è una valutazione medica né una prescrizione di allenamento. Lo staff può aiutarti ad approfondire le tue esigenze.</p></details></div>
 </section>
 </main>
-<section class="gf-cta gf-cta--refined">
+<section class="gf-cta">
   <p class="gf-eyebrow" style="justify-content:center">Caserta · Viale Carlo III, 20</p>
-  <h2>Ci vediamo in palestra.</h2>
+  <h2>Ci vediamo <em>in palestra.</em></h2>
   <a class="gf-btn gf-btn--solid" href="contatti.html">Vieni a conoscerci ↗</a>
 </section>
 <div class="gfw-eq" aria-hidden="true"></div>
