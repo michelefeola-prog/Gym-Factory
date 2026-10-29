@@ -166,7 +166,8 @@
   /* ---------- 8. TOUR a scorrimento orizzontale ---------- */
   const tours = $$('[data-gfw-tour]').map((sec) => {
     // lo "sticky" si rompe se un antenato ha overflow:hidden → lo convertiamo in clip (stesso aspetto)
-    for (let p = sec.parentElement; p && p !== document.documentElement; p = p.parentElement) {
+    const manual = !!sec.querySelector('.gfw-tour__stage');
+    if (!manual) for (let p = sec.parentElement; p && p !== document.documentElement; p = p.parentElement) {
       const cs = getComputedStyle(p);
       if (/(hidden|auto|scroll)/.test(cs.overflowX + cs.overflowY)) {
         if (cs.overflowX !== 'visible') p.style.overflowX = 'clip';
@@ -175,7 +176,7 @@
     }
     const track = sec.querySelector('.gfw-tour__track');
     const items = Array.from(track.children);
-    const t = { sec, track, items, max: 0, top: 0, h: 0,
+    const t = { sec, track, items, manual, prev: sec.querySelector('.gfw-tour__arrow--prev'), next: sec.querySelector('.gfw-tour__arrow--next'), max: 0, top: 0, h: 0,
       barEl: sec.querySelector('.gfw-tour__bar'), cur: sec.querySelector('[data-cur]'), tot: sec.querySelector('[data-tot]') };
     if (t.tot) t.tot.textContent = String(items.length).padStart(2, '0');
     items.forEach((it) => { const im = it.querySelector('img'); if (im && im.naturalWidth) it.style.setProperty('--ar', im.naturalWidth + '/' + im.naturalHeight); });
@@ -185,12 +186,36 @@
       it.addEventListener('click', open);
       it.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
     });
+    if (manual) {
+      if (t.prev) t.prev.addEventListener('click', () => stepTour(t, -1));
+      if (t.next) t.next.addEventListener('click', () => stepTour(t, 1));
+      track.addEventListener('scroll', () => updateTour(t), { passive: true });
+      track.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); stepTour(t, 1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); stepTour(t, -1); }
+      });
+    }
     return t;
   });
+  function nearestTourItem(t) {
+    const m = t.track.scrollWidth - t.track.clientWidth;
+    if (m > 0 && t.track.scrollLeft <= m * 0.01) return 0;
+    if (m > 0 && t.track.scrollLeft >= m * 0.99) return t.items.length - 1;
+    const tr = t.track.getBoundingClientRect(), c = tr.left + tr.width / 2;
+    let best = 0, bd = Infinity;
+    t.items.forEach((it, i) => { const r = it.getBoundingClientRect(); const d = Math.abs(r.left + r.width / 2 - c); if (d < bd) { bd = d; best = i; } });
+    return best;
+  }
+  function stepTour(t, dir) {
+    const i = Math.max(0, Math.min(t.items.length - 1, nearestTourItem(t) + dir));
+    const tr = t.track.getBoundingClientRect(), r = t.items[i].getBoundingClientRect();
+    t.track.scrollBy({ left: (r.left + r.width / 2) - (tr.left + tr.width / 2), behavior: reduce ? 'auto' : 'smooth' });
+  }
   function measureTours() {
     tours.forEach((t) => {
-      if (reduce) return;
       t.items.forEach((it) => { const im = it.querySelector('img'); if (im && im.naturalWidth) it.style.setProperty('--ar', im.naturalWidth + '/' + im.naturalHeight); });
+      if (t.manual) { updateTour(t); return; }
+      if (reduce) return;
       const last = t.items[t.items.length - 1];
       // l'ultima foto si ferma al centro dello schermo
       t.max = Math.max(0, last.offsetLeft + last.offsetWidth / 2 - innerWidth / 2);
@@ -200,10 +225,16 @@
     });
   }
   function updateTour(t) {
-    if (reduce) return;
-    const span = t.sec.offsetHeight - t.h;
-    const p = clamp((scrollY - t.top) / (span || 1));
-    t.track.style.transform = `translate3d(${-p * t.max}px,0,0)`;
+    if (reduce && !t.manual) return;
+    let p;
+    if (t.manual) {
+      const m = t.track.scrollWidth - t.track.clientWidth;
+      p = m > 0 ? clamp(t.track.scrollLeft / m) : 0;
+    } else {
+      const span = t.sec.offsetHeight - t.h;
+      p = clamp((scrollY - t.top) / (span || 1));
+      t.track.style.transform = `translate3d(${-p * t.max}px,0,0)`;
+    }
     t.sec.style.setProperty('--tp', p.toFixed(4));
     t.sec.classList.toggle('is-moving', p > 0.02);
     let best = 0, bd = 9;
@@ -217,6 +248,11 @@
       it.style.setProperty('--o', (0.45 + 0.55 * clamp(1.2 - ad * 0.9)).toFixed(2));
       if (ad < bd) { bd = ad; best = i; }
     });
+    if (t.manual) {
+      if (p < 0.01) best = 0; else if (p > 0.99) best = t.items.length - 1;
+      if (t.prev) t.prev.disabled = p <= 0.01;
+      if (t.next) t.next.disabled = p >= 0.99;
+    }
     if (t.cur) t.cur.textContent = String(best + 1).padStart(2, '0');
   }
 
@@ -273,7 +309,7 @@
         const k = clamp((innerHeight - r.top) / (innerHeight + r.height));
         img.style.transform = `translate3d(0,${((k - 0.5) * -90).toFixed(1)}px,0) scale(${(1.14 - k * 0.07).toFixed(3)})`;
       });
-      tours.forEach(updateTour);
+      tours.forEach((t) => { if (!t.manual) updateTour(t); });
     }
     if (spot) { sx = lerp(sx, mx, 0.14); sy = lerp(sy, my, 0.14); spot.style.setProperty('--sx', sx.toFixed(1) + 'px'); spot.style.setProperty('--sy', sy.toFixed(1) + 'px'); }
     if (ticking) requestAnimationFrame(frame);
