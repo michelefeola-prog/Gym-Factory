@@ -182,7 +182,7 @@
     items.forEach((it) => { const im = it.querySelector('img'); if (im && im.naturalWidth) it.style.setProperty('--ar', im.naturalWidth + '/' + im.naturalHeight); });
     items.forEach((it) => {
       it.tabIndex = 0; it.setAttribute('role', 'button');
-      const open = () => openLightbox(it.querySelector('img'), (it.querySelector('figcaption') || {}).textContent || it.querySelector('img').alt);
+      const open = () => openLightbox(it.querySelector('img'), (it.querySelector('figcaption') || {}).textContent || '');
       it.addEventListener('click', open);
       it.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
     });
