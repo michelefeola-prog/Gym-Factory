@@ -476,3 +476,18 @@ h1 em,h2 em{font-family:var(--f-serif);font-style:italic;font-weight:400;text-tr
 @media (max-width:760px){
   .gfw-bento .b12{grid-column:1/3!important;grid-row:span 2!important}
 }
+
+/* Scalinata a 4 gradini */
+@media (min-width:861px){
+  .gfx-steps--4{grid-template-columns:repeat(4,1fr)}
+  .gfx-steps--4 .gfx-step:nth-child(1){min-height:clamp(17rem,24vw,22rem)}
+  .gfx-steps--4 .gfx-step:nth-child(2){min-height:clamp(21rem,30vw,27rem)}
+  .gfx-steps--4 .gfx-step:nth-child(3){min-height:clamp(25rem,36vw,32rem)}
+  .gfx-steps--4 .gfx-step:nth-child(4){min-height:clamp(30rem,42vw,38rem)}
+}
+@media (max-width:860px){
+  .gfx-steps--4 .gfx-step:nth-child(1){width:70%}
+  .gfx-steps--4 .gfx-step:nth-child(2){width:80%}
+  .gfx-steps--4 .gfx-step:nth-child(3){width:90%}
+  .gfx-steps--4 .gfx-step:nth-child(4){width:100%}
+}
