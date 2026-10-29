@@ -21,6 +21,22 @@
 <script>try{if(!sessionStorage.gfi&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('gf-intro')}}catch(e){}</script>
 <link rel="stylesheet" href="assets/css/gf.css">
 <link rel="stylesheet" href="gym-wow-v14.css">
+<style>
+/* Scalinata a 4 gradini */
+@media (min-width:861px){
+  .gfx-steps.gfx-steps--4{grid-template-columns:repeat(4,minmax(0,1fr));align-items:end}
+  .gfx-steps.gfx-steps--4 .gfx-step:nth-child(1){min-height:clamp(17rem,24vw,22rem)}
+  .gfx-steps.gfx-steps--4 .gfx-step:nth-child(2){min-height:clamp(21rem,30vw,27rem)}
+  .gfx-steps.gfx-steps--4 .gfx-step:nth-child(3){min-height:clamp(25rem,36vw,32rem)}
+  .gfx-steps.gfx-steps--4 .gfx-step:nth-child(4){min-height:clamp(30rem,42vw,38rem)}
+}
+@media (max-width:860px){
+  .gfx-steps.gfx-steps--4 .gfx-step:nth-child(1){width:70%}
+  .gfx-steps.gfx-steps--4 .gfx-step:nth-child(2){width:80%}
+  .gfx-steps.gfx-steps--4 .gfx-step:nth-child(3){width:90%}
+  .gfx-steps.gfx-steps--4 .gfx-step:nth-child(4){width:100%}
+}
+</style>
 </head>
 <body>
 <a class="skip" href="#contenuto">Vai al contenuto</a>
